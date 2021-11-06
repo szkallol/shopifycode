@@ -1,0 +1,258 @@
+
+{% if section.settings.responsive == true %}
+
+<style>
+ 
+  @media(max-width:575){
+  
+    .feature{
+    
+    padding:20px 0 !impotant;
+    
+    }
+  
+  }
+  
+    
+</style>
+  {% endif %}
+
+
+
+
+
+
+<section class="feature" style="padding: {{section.settings.padding}} px 0;">
+  
+  <div class="container" >
+    <h1 style="text-align:center">{{ section.settings.title}}  </h1>
+    <style>
+    
+     .container h1 {
+  
+  color:{{section.settings.title-color}}
+    
+    
+  }
+    
+  
+  
+    
+    </style>
+    
+    {% for block in section.blocks %}
+    {% assign product=block.settings.product %}
+     {% assign img=block.settings.image %}
+    
+     
+    
+    
+    <div class="row">
+      
+      <div class="col {{block.settings.selectorder}}" >
+        <div class="content">
+          <h2 style="color:{{block.settings.title-color1}}" >{{block.settings.title}}
+            
+          </h2>
+          
+          <p>{{block.settings.content}}
+          
+          </p>
+          
+         
+          
+          {% if product !=blank %}
+          
+          <a href="  {{ product.url }}" class="slide-button animated btn ">
+          
+           {{block.settings.buttontext}} </a>
+          
+          {% endif%}
+          
+          <style>
+            .content p {
+  color:{{block.settings.content-color}}
+            
+          </style>
+          
+        </div>
+       
+        
+        
+      </div>
+      <div class="col">
+        <div>
+         
+       
+           {% if img !=blank %}
+          <img src="{{img |img_url:'500x200' }}" alt="">
+          {% endif%}
+          
+        </div>
+        
+        
+      </div>
+    </div>
+     {% endfor %}
+    
+     
+  </div>
+  
+  
+  
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+  {
+    
+    "name": "feature section",
+    "max_blocks":3,
+
+    "settings": [
+     {
+     "type": "text",
+     "id": "title",
+      "label": "section spacing"
+
+
+},
+    {
+      "type": "color",
+      "id": "title-color",
+      "label": "Heading Color",
+      "default": "#000"
+    },	
+ 
+    {
+     "type": "range",
+     "id": "padding",
+      "label": "heading",
+      "min": 20,
+       "max": 120,
+       "default":50,
+       "step": 5
+
+},
+    
+    
+ 
+   	
+ {
+     "type": "checkbox",
+     "id": "responsive",
+      "label": "padding responsive",
+       "default": true
+
+
+}
+     
+],
+    
+
+     "blocks" : [
+     {   
+      "type": "text_block",
+        "name": "feature",
+          "settings": [
+       {
+    "type":"image_picker",
+    "id":"image",
+     "label":"Add image"
+},
+   {
+    "type":"text",
+    "id":"title",
+     "label":"Add Title",
+      "default":"Thank you for walking with us"
+},
+{
+    "type":"color",
+    "id":"title-color1",
+     "label":"select color",
+      "default":"#474b76"
+},
+ {
+    "type":"richtext",
+    "id":"content",
+     "label":"Add Content"
+     
+},
+{
+    "type":"color",
+    "id":"content-color",
+     "label":"select color",
+      "default":"#474b76"
+},
+
+
+ {
+    "type":"product",
+    "id":"product",
+     "label":"Select Product"
+     
+},
+
+ {
+    "type":"text",
+    "id":"buttontext",
+     "label":"Button Text",
+       "default":"Buy Now"
+     
+},
+
+{
+    "type":"select",
+    "id":"selectorder",
+     "label":"column order",
+    "options":[
+      {
+      "label":"Text left Image right",
+       "value":"order-0"
+
+},
+ {
+      "label":"Image left Text right",
+       "value":"order-1"
+       
+}
+
+],
+        
+        "default":"order-0"
+     
+}
+
+           
+]
+      
+       
+ 
+
+}
+
+
+
+]
+
+}
+
+
+
+  
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
