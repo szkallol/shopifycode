@@ -1,0 +1,167 @@
+
+
+ <div class="container" >
+    
+   <div>
+
+{% include "custom-heading" %}
+
+</div>
+   
+   
+         {% assign product = section.settings.selectedproduct %}
+         {% assign product_title = product.title %}
+          {% assign product_image = product.featured_image %}
+          {% assign product_id = product.id %}
+          {% assign product_url = product.url %}
+          
+   
+        {% assign video = section.settings.video %}
+  
+   
+   
+   <div class="row">
+      
+      
+  <div class="col-md-6">
+   <div class="productbox">
+      <img src="{{ product_image | img_url: 'master' }}" class="w-100 shadow" alt=" {{  product_id }}  {{  product_title }}">
+    
+     
+     <h2 style="padding: 20px;
+    text-align: center;">
+
+       {{product_title}}
+     
+     </h2>
+     
+     <a href = " {{  product_url }}" class="btn btn-success">View Details</a>
+     
+     
+     
+     
+    </div>
+  
+      
+      </div>
+       
+      <div class="col-md-6">
+       
+    
+    
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+See Video For Details
+        </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+       
+         {% if video.type == 'youtube' %}
+    
+        <div class="ratio ratio-16x9">
+  <iframe src="https://www.youtube.com/embed/{{ video.id }}"width="650" height="315"YouTube video" allowfullscreen></iframe>
+        </div>
+        
+         {% elsif video.type == 'vimeo' %}
+     
+        <div class="ratio ratio-16x9">
+   
+          <iframe src="https://player.vimeo.com/video/{{ video.id }}"width="100%" height="500"frameborder="0"allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+         
+        </div>
+        {% endif %}
+         
+      </div>
+     
+    </div>
+  </div>
+</div>
+        
+     </div>
+   </div>
+   
+   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Product Section",
+    "settings": [
+
+    {
+          "type":"product",
+          "label":"select product",
+          "id":"selectedproduct"
+         
+},
+ {
+          "type":"video_url",
+          "label":"upload video",
+          "id":"video",
+           "accept": ["youtube", "vimeo"]
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+  
+
+
+<style>
+
+.modal-content {
+    
+    
+    background-color: #fff0;
+    
+border: 0px solid rgba(0,0,0,0);
+
+box-shadow: 0 0px 0px rgb(0 0 0 / 0%);
+
+
+
+}
+  
+  
+  
+.ratio>* {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-success {
+   
+    display: flex;
+    justify-content: center;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;}
+
+
+</style>
