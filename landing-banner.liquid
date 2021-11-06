@@ -1,0 +1,147 @@
+<section class="hero-banner" style=" background-image:url({{section.settings.hero-banner |img_url:'1200x334'  }});">
+  <div class="container">
+    
+    
+    
+    
+    <div class="hero-banner-content">
+      
+      
+      {% assign overlay = section.settings.overlay%}
+      {% if overlay == true %}
+      <div class="overlay"> </div>
+      {% endif%}
+      
+      
+      <h2> {{section.settings.Hero-Banner-Title}} </h2>
+      <p> {{section.settings.description}} </p>
+    </div>
+  </div>
+</section>
+ 
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+  {
+    "name": "hero-banner",
+    "settings": [
+    {
+    "type":"image_picker",
+    "id":"hero-banner",
+     "label":"hero-banner-image"
+},
+   {
+    "type":"text",
+    "id":"Hero-Banner-Title",
+     "label":"hero-banner-title",
+      "default":"Thank you for walking with us"
+},
+ {  "type":"color",
+    "id":"hero-banner-title-color",
+     "label":"select color",
+      "default":"#000"
+},
+ {
+    "type":"textarea",
+    "id":"description",
+     "label":"Add Content",
+     "default":"As an Indigenous-owned company, our vision is to build a vibrant, global brand that makes a significant impact in Indigenous communities."
+},
+
+ 
+ {  "type":"color",
+    "id":"hero-banner-description-color",
+     "label":"select color",
+      "default":"#000"
+},
+{
+    "type":"checkbox",
+    "id":"overlay",
+     "label":"select overlay",
+      "default":false
+     
+}
+]}
+  
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+
+
+<style>
+  .hero-banner{
+   
+    background-size:cover ;
+    
+  
+   
+    
+    
+  }
+  
+  .overlay{
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   background-color: #00000033;
+    z-index: -1;
+     
+  
+  
+  }
+  .masthead:after, section:after {
+   
+
+    background: none;
+  }
+  
+  .container{
+   width:100%;
+   
+    margin:auto;
+     }
+
+ .hero-banner-content {
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   position:relative;
+    z-index:0;
+   min-height:100vh;
+   
+    
+   
+    
+   
+}
+  .hero-banner-content h2{
+  font-size: 60px;
+   text-align:center;
+    color:{{section.settings.hero-banner-title-color}} 
+    
+  }
+  .hero-banner-content p{
+  font-size: 25px;
+     text-align:center;
+   
+ color:{{section.settings.hero-banner-description-color}}
+    
+  } 
+</style>
