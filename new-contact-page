@@ -3,6 +3,8 @@
    box-sizing:border-box;
   
   }
+  
+  
   .form-page-1{
     width:calc(80% - 100px);
     padding:50px 30px;
@@ -15,7 +17,10 @@
   .col-1-2{
     flex: 1 0 50%;
     padding: 10px;
-     }
+    
+  
+  }
+  
   .col-1-1{
    flex: 1 0 100%;
     padding: 10px;
@@ -33,56 +38,93 @@
     
     padding: 5px;
 }
- </style>  
-
-      <div class="form-page-1">
-
-         {% assign formId = 'contactform' %}
-         {% form 'contact', id:formId %}
-         {% if form.posted_successfully? %}
-           Comment posted  successfully!
-         {% else%}
-         {{ form.errors|default_errors }}
-         {% endif%}
   
-     <div class="flex">
+  
+</style>  
+
+<div class="form-page-1">
+
+  {% assign formId = 'contactform' %}
+  {% form 'contact', id:formId %}
+   
+  {% if form.posted_successfully? %}
+     Comment posted  successfully!
+  {% else%}
+   {{ form.errors|default_errors }}
+  {% endif%}
+  
+  <div class="flex">
      <div class="col-1-2"> 
-            <input placeholder="Full Name" type="Text" name="contact[fullname]">
+     <input placeholder="Full Name" type="Text" name="contact[fullname]" {% if section.settings.namerequired == true %} required {% endif %}>
     </div>
      <div class="col-1-2"> 
-           <input placeholder="Email Id" type="email" name="contact[email]">
+     <input placeholder="Email Id" type="email" name="contact[email]">
    
-     </div>
+   </div>
+      <div class="col-1-2"> 
+     
+      <select name="contact[country]">
+        {% for block in section.blocks %}
+        <option value="{{block.settings.country}}">{{block.settings.country}}</option>
+        
+        {% endfor %}
+                
+      </select>
+   </div> 
      <div class="col-1-2"> 
-        <select name="contact[country]">
-         <option value="AUS">AUS</option>
-         <option value="BAN">BAN</option>
-         <option value="USA">USA</option>
-         <option value="UK">UK</option>
-         <option value="GER">GER</option>
-        </select>
-     </div> 
-     <div class="col-1-2"> 
-           <input value="Female" type="radio" name="contact[gender]" id="male"><label for="male">Male</label>
-           <input value="Male" type="radio" name="contact[gender]" id="female" ><label for="female">Female</label>
-           <input value="Other" type="radio" name="contact[gender]"id="other"><label for="other">Other</label>
-     </div>   
-     <div class="col-1-1"> 
-           <textarea placeholder="Message" type="submit" rows="5" ></textarea>
-     </div> 
-     <div class="col-1-2"> 
-          <input value="Send Message" type="submit" name="contact[submit]">
+     <input value="Female" type="radio" name="contact[gender]" id="male"><label for="male">Male</label>
+       <input value="Male" type="radio" name="contact[gender]" id="female" ><label for="female">Female</label>
+       <input value="Other" type="radio" name="contact[gender]"id="other"><label for="other">Other</label>
+   </div>   
+     
+      <div class="col-1-1"> 
+     
+       <textarea placeholder="Message" type="submit" rows="5" ></textarea>
+    
+      </div> 
+     
+       <div class="col-1-2"> 
+     <input value="Send Message" type="submit" name="contact[submit]">
      </div>  
-     </div> 
+ </div> 
+  
+  
+  
+  
   {% endform %}
   
 </div>
 
-
 {% schema %}
   {
     "name": "Contact form",
-    "settings": []
+    "settings": [
+      {
+         "type":"checkbox",
+         "id": "namerequired",
+         "label":"Full Name Required"
+}
+
+
+
+],
+     "blocks" : [
+       {
+
+       "type" : "text_block",
+        "name": "Select Country",
+        "settings":[
+       {
+         "type":"text",
+         "id": "country",
+         "label":"Add Country"
+}
+] 
+
+}
+      
+
+]
   }
 {% endschema %}
 
